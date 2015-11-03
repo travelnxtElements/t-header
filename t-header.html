@@ -48,7 +48,7 @@
     }
     </style>
         <div class="layout horizontal center body">
-            <a href$="{{url}}" on-click="_checkUrl">
+            <a  on-click="_checkUrl">
                 <iron-icon icon="arrow-back"></iron-icon>
             </a>
             <div class="layout horizontal center flex header__mainRow">
@@ -90,8 +90,8 @@ Polymer({
     },
 
     _checkUrl:function(e){
-        if(this.url==""){
-            e.preventDefault();
+        if(this.url !== ""){
+            window.location.href = this.url;
         }
     }
 

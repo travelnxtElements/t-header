@@ -40,6 +40,7 @@
             width: 9px;
             height: 9px;
             vertical-align: inherit;
+            margin-left: 5px;
         }
         .modal{
             position: fixed;
@@ -71,17 +72,17 @@
                 <iron-icon id="travelIcon" icon="{{travelIcon}}"></iron-icon>
                 <span>{{toPlace}}</span>
             </h6>
-            <p id="detail" on-click="modalFunction" >
+            <p id="detail" on-click="_takeBack" class="layout horizontal center center-justified"> <!-- on-click="modalFunction"  -->
                 <span>{{_getDate(departureDate)}}</span> 
-                <span hidden$="{{isOneWay}}" ><span>-</span>
+                <span hidden$="{{isOneWay}}" class="layout horizontal"><span>&nbsp;-&nbsp;</span>
                 <span>{{_getDate(returnDate)}}</span></span>
                 <template is="dom-repeat" items="[[passengerData]]" as="item">
                     <template is="dom-if" if="{{_checkPassengerQuantity(item.quantity,item.type)}}">
-                    <span style="margin-left:-3px;">,&nbsp;<span>{{_getPassenger(item.quantity,item.type)}}</span>
+                    <span>,&nbsp;<span>{{_getPassenger(item.quantity,item.type)}}</span>
                     </span>
                     </template>
                 </template>
-                <iron-icon hidden$={{hideIcon}} id="pencil" icon="editor:mode-edit" on-click="_takeBack"></iron-icon>
+                <iron-icon hidden$={{hideIcon}} id="pencil" icon="editor:mode-edit" ></iron-icon>
             </p>
         </div>
     </template>
@@ -172,12 +173,12 @@ Polymer({
             case 'Child':
                 if (quantity == 0 || quantity > 1)
                     return quantity + " Children";
-                return quantity + " " + type;
+                return (quantity + " " + type).trim();
                 break;
             default:
                 if (quantity == 0 || quantity > 1)
                     return quantity + " " +type +"s";
-                return quantity + " " + type;
+                return (quantity + " " + type).trim();
         }
         
     },
@@ -200,7 +201,7 @@ Polymer({
         var dateObj = new Date(val);
         var date = dateObj.getDate() < 10 ? '0' + dateObj.getDate() : dateObj.getDate();
         var month = dateObj.toDateString().substr(3, 5);
-        return date + " " + month;
+        return (date + " " + month).trim();
     },
 
     _takeBack: function(){
