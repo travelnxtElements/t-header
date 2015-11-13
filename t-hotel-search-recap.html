@@ -1,0 +1,171 @@
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../iron-icons/iron-icons.html" />
+<link rel="import" href="../iron-icons/editor-icons.html" />
+<link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html" />
+<dom-module id="t-hotel-search-recap">
+    <template>
+        <style>
+        :host {
+            display: block;
+        }
+        
+        h6 {
+            font-size: 16px;
+            line-height: 20px;
+            text-transform: capitalize;
+            margin: 0;
+            padding: 0;
+            font-weight: normal;
+        }
+        
+        p {
+            margin: 0;
+            padding: 0;
+            font-size: 12px;
+            line-height: 20px;
+        }
+        
+        #pencil {
+            width: 9px;
+            height: 9px;
+            vertical-align: inherit;
+            margin-left: 5px;
+        }
+        
+        :host([center-align]) {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+        
+        :host([center-align]) h6 {
+            display: inline;
+        }
+        </style>
+        <div class="layout vertical">
+            <h6 class="layout horizontal center">
+                <template is="dom-if" if="{{_checkHotelName}}">
+                    <span>{{hotelName}}</span>
+                </template>
+                <template is="dom-if" if="{{!_checkHotelName}}">
+                    <span>{{searchObject.destination.cityName}}</span>
+                </template>
+            </h6>
+            <p id="detail" on-click="_takeBack" class="layout horizontal center center-justified">
+                <!-- on-click="modalFunction"  -->
+                <span>{{_getDate(searchObject.checkInDate.date)}}</span>
+                <span>&nbsp;-&nbsp;</span>
+                <span>{{_getDate(searchObject.checkOutDate.date)}}</span>
+                <span>,&nbsp;</span>
+                <span>{{_getCountNights(searchObject.checkInDate.date,searchObject.checkOutDate.date)}}</span>
+                <span>,&nbsp;</span>
+                <span>{{_getCountPassengers(searchObject.rooms)}}</span>
+                <iron-icon hidden$={{hideIcon}} id="pencil" icon="editor:mode-edit"></iron-icon>
+            </p>
+        </div>
+    </template>
+</dom-module>
+<script>
+Polymer({
+
+    is: 't-hotel-search-recap',
+
+    properties: {
+
+        /*Name of the hotel for result details page*/
+        hotelName: {
+            type: String,
+            value:''
+        },
+
+        /*This is a boolean value to centrall align the content.. Used in search overlay*/
+        centerAlign: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true
+        },
+
+        /*Put an Url to go back to when click on the edit button.*/
+        url: {
+            type: String,
+            value: ""
+        },
+
+        searchObject: {
+            type: Object,
+            value: function () {
+                return {};
+            }
+        },
+
+        /*to check if theres any hotel name present or not*/
+        _checkHotelName:{
+            type:Boolean,
+            computed:'_checkHotelFunction(hotelName)'
+        }
+
+
+    },
+
+    /*to check if theres any hotel name present or not*/
+    _checkHotelFunction: function(hotelName) {
+        if (hotelName.length > 0) {
+            return true;
+        }
+        return false;
+    },
+
+    /*This function is used to calculate the number of days passenger is booking for. This function is copied from http://www.htmlgoodies.com/html5/javascript/calculating-the-difference-between-two-dates-in-javascript.html#fbid=qmDgJTYgi3E*/
+    _dateDiff:function(datepart, fromdate, todate) {  
+      datepart = datepart.toLowerCase();    
+      var diff = todate - fromdate; 
+      var divideBy = { d:86400000}; 
+      
+      return Math.floor( diff/divideBy[datepart]);
+    },
+
+    /*This function is used to get the correct format of travelling nights.*/
+    _getCountNights:function(fromdate, todate){
+        var toDate = new Date(todate),
+        fromDate = new Date(fromdate);
+        var nights = this._dateDiff('d', fromDate, toDate);
+        if(nights>1){
+            return nights + " nights";
+        }else{
+            return nights + " night";
+        }
+    },
+
+
+    /*This function is used to get the correct format of date.*/
+    _getDate: function(val) {
+        var dateObj = new Date(val);
+        var date = dateObj.getDate() < 10 ? '0' + dateObj.getDate() : dateObj.getDate();
+        var month = dateObj.toDateString().substr(3, 5);
+        return (date + " " + month).trim();
+    },
+
+    _getCountPassengers:function(obj){
+        var obj = obj[0],
+        count = 0; 
+        // Visit non-inherited enumerable keys
+        for (var item in obj) {
+            if(obj[item]!==null || obj[item]!== undefined){   
+                if(obj[item].quantity!==null || obj[item].quantity!== undefined){
+                    count += obj[item].quantity
+                }
+            }
+        };
+        if(count>1){
+            return count + " Guests";
+        }else{
+            return count + " Guest";
+        }
+    },
+
+    _takeBack: function() {
+        window.location.href = this.url;
+    }
+});
+</script>
