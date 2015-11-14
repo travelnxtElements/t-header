@@ -1,109 +1,115 @@
 <html>
+
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1"> 
-  	<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-	<link rel="import" href="../t-header.html">
-	<link rel="import" href="../t-flight-header.html">
-	<link rel="import" href="../t-hotel-search-recap.html">
-	<style>
-		body,h2{
-			margin: 0;
-		}
-	</style>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../t-header.html">
+    <link rel="import" href="../t-flight-header.html">
+    <link rel="import" href="../t-hotel-search-recap.html">
+    <style>
+    body,
+    h2 {
+        margin: 0;
+    }
+    </style>
 </head>
-<body>
-	<t-header>
-		<t-flight-header></t-flight-header>
-	</t-header>
 
-	<t-header normal-heading>
-	</t-header>
-	<t-header right-icon="arrow-forward">
-		<t-hotel-search-recap class="withoutHotelName">
-		</t-hotel-search-recap>
-	</t-header>
-	<t-header right-icon="arrow-forward">
-		<t-hotel-search-recap hotel-name="Hyatt Whatever">
-		</t-hotel-search-recap>
-	</t-header>
+<body>
+    <t-header>
+        <t-flight-header></t-flight-header>
+    </t-header>
+    <t-header normal-heading>
+    </t-header>
+    <t-header right-icon="arrow-forward">
+        <t-hotel-search-recap class="withoutHotelName">
+        </t-hotel-search-recap>
+    </t-header>
+    <t-header right-icon="arrow-forward">
+        <t-hotel-search-recap hotel-name="Hyatt Whatever">
+        </t-hotel-search-recap>
+    </t-header>
 </body>
 <script>
-	document.addEventListener('right-button-click',function(e){
-		e.srcElement.rightIcon = e.srcElement.rightIcon == "arrow-back"? "arrow-forward" :"arrow-back";
-	});
-	document.querySelector('t-hotel-search-recap').searchObject={
-                "productType": "Hotel",
-                "destination": {
-                    "name": "Las Vegas, NV, United States - McCarran International Airport (LAS)",
-                    "geoCode": "36.0854,-115.15",
-                    "type": "Airport",
-                    "code": "LAS",
-                    "cityName": "Las Vegas",
-                    "countryCode": "US",
-                    "countryName": "United States",
-                    "stateCode": "NV",
-                    "stateName": "Nevada",
-                    "zipCode": null,
-                    "additionalInfo": null,
-                    "formattedAddress": "Las Vegas, NV, United States - McCarran International Airport (LAS)",
-                    "gmtOffsetMinutes": 0,
-                    "radius": null
-                },
-                "checkInDate": {
-                    "date": "Fri, 25 Dec, 2015",
-                    "time": "12:00 AM",
-                    "systemDateTime": "2015-12-25T00:00:00"
-                },
-                "checkOutDate": {
-                    "date": "Thu, 31 Dec, 2015",
-                    "time": "12:00 AM",
-                    "systemDateTime": "2015-12-26T00:00:00"
-                },
-                "rooms": [{
-                    "adults": {
-                        "quantity": 1,
-                        "type": "Adult",
-                        "ages": [
-                            25
-                        ]
-                    },
-                    "children": {
-                        "quantity": 2,
-                        "type": "Child",
-                        "ages": [
-                            25
-                        ]
-                    }
-                }],
-                "propertyId": null,
-                "preferences": {
-                    "hotelChains": null,
-                    "hotelName": "",
-                    "ratings": [
+document.addEventListener('right-button-click', function(e) {
+    e.srcElement.rightIcon = e.srcElement.rightIcon == "arrow-back" ? "arrow-forward" : "arrow-back";
+});
+var searchObject = {
+    "productType": "Hotel",
+    "destination": {
+        "name": "Las Vegas, NV, United States - McCarran International Airport (LAS)",
+        "geoCode": "36.0854,-115.15",
+        "type": "Airport",
+        "code": "LAS",
+        "cityName": "Las Vegas",
+        "countryCode": "US",
+        "countryName": "United States",
+        "stateCode": "NV",
+        "stateName": "Nevada",
+        "zipCode": null,
+        "additionalInfo": null,
+        "formattedAddress": "Las Vegas, NV, United States - McCarran International Airport (LAS)",
+        "gmtOffsetMinutes": 0,
+        "radius": null
+    },
+    "checkInDate": {
+        "date": "Fri, 25 Dec, 2015",
+        "time": "12:00 AM",
+        "systemDateTime": "2015-12-25T00:00:00"
+    },
+    "checkOutDate": {
+        "date": "Thu, 31 Dec, 2015",
+        "time": "12:00 AM",
+        "systemDateTime": "2015-12-26T00:00:00"
+    },
+    "rooms": [{
+        "adults": {
+            "quantity": 1,
+            "type": "Adult",
+            "ages": [
+                25
+            ]
+        },
+        "children": {
+            "quantity": 2,
+            "type": "Child",
+            "ages": [
+                25
+            ]
+        }
+    }],
+    "propertyId": null,
+    "preferences": {
+        "hotelChains": null,
+        "hotelName": "",
+        "ratings": [
 
-                    ],
-                    "amenities": [
+        ],
+        "amenities": [
 
-                    ]
-                },
-                "fetchAllAvailableRooms": false,
-                "propertyIdsToSearch": null,
-                "currency": "USD",
-                "culture": null,
-                "generatedOn": {
-                    "date": "Fri, 13 Nov, 2015",
-                    "time": "5:59 AM",
-                    "systemDateTime": "2015-11-13T05:59:47.4015038+00:00"
-                },
-                "searchId": "8e501afa-2847-43b0-b0c6-e0a5e35d5572",
-                "isSuccessful": false,
-                "responseContentType": "Rates",
-                "attributes": null
-            }
+        ]
+    },
+    "fetchAllAvailableRooms": false,
+    "propertyIdsToSearch": null,
+    "currency": "USD",
+    "culture": null,
+    "generatedOn": {
+        "date": "Fri, 13 Nov, 2015",
+        "time": "5:59 AM",
+        "systemDateTime": "2015-11-13T05:59:47.4015038+00:00"
+    },
+    "searchId": "8e501afa-2847-43b0-b0c6-e0a5e35d5572",
+    "isSuccessful": false,
+    "responseContentType": "Rates",
+    "attributes": null
+}
+var item = document.querySelector('.withoutHotelName');
+item.header = searchObject.destination.cityName;
+item.checkInDate = searchObject.checkInDate.date;
+item.checkOutDate = searchObject.checkOutDate.date;
+item.passenger = searchObject.rooms[0];
 </script>
+
 </html>
-
-

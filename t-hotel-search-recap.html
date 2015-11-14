@@ -44,23 +44,16 @@
         }
         </style>
         <div class="layout vertical">
-            <h6 class="layout horizontal center">
-                <template is="dom-if" if="{{_checkHotelName}}">
-                    <span>{{hotelName}}</span>
-                </template>
-                <template is="dom-if" if="{{!_checkHotelName}}">
-                    <span>{{searchObject.destination.cityName}}</span>
-                </template>
-            </h6>
+            <h6 class="layout horizontal center">{{header}}</h6>
             <p id="detail" on-click="_takeBack" class="layout horizontal center center-justified">
                 <!-- on-click="modalFunction"  -->
-                <span>{{_getDate(searchObject.checkInDate.date)}}</span>
+                <span>{{_getDate(checkInDate)}}</span>
                 <span>&nbsp;-&nbsp;</span>
-                <span>{{_getDate(searchObject.checkOutDate.date)}}</span>
+                <span>{{_getDate(checkOutDate)}}</span>
                 <span>,&nbsp;</span>
-                <span>{{_getCountNights(searchObject.checkInDate.date,searchObject.checkOutDate.date)}}</span>
+                <span>{{_getCountNights(checkInDate,checkOutDate)}}</span>
                 <span>,&nbsp;</span>
-                <span>{{_getCountPassengers(searchObject.rooms)}}</span>
+                <span>{{_getCountPassengers(passenger)}}</span>
                 <iron-icon hidden$={{hideIcon}} id="pencil" icon="editor:mode-edit"></iron-icon>
             </p>
         </div>
@@ -73,10 +66,30 @@ Polymer({
 
     properties: {
 
-        /*Name of the hotel for result details page*/
-        hotelName: {
+        /*Header for  the result details page*/
+        header: {
             type: String,
             value:''
+        },
+
+        /*Chekin Date*/
+        checkInDate: {
+            type: String,
+            value:''
+        },
+
+        /*Check out date*/
+        checkInDate: {
+            type: String,
+            value:''
+        },
+
+        /*Pass the passenger object The first of rooms array in Mystique api.*/
+        passenger: {
+            type: Object,
+            value: function () {
+                return {};
+            }
         },
 
         /*This is a boolean value to centrall align the content.. Used in search overlay*/
@@ -85,36 +98,14 @@ Polymer({
             value: false,
             reflectToAttribute: true
         },
-
+        
         /*Put an Url to go back to when click on the edit button.*/
         url: {
             type: String,
-            value: ""
-        },
-
-        searchObject: {
-            type: Object,
-            value: function () {
-                return {};
-            }
-        },
-
-        /*to check if theres any hotel name present or not*/
-        _checkHotelName:{
-            type:Boolean,
-            computed:'_checkHotelFunction(hotelName)'
+            value: ''
         }
-
-
     },
 
-    /*to check if theres any hotel name present or not*/
-    _checkHotelFunction: function(hotelName) {
-        if (hotelName.length > 0) {
-            return true;
-        }
-        return false;
-    },
 
     /*This function is used to calculate the number of days passenger is booking for. This function is copied from http://www.htmlgoodies.com/html5/javascript/calculating-the-difference-between-two-dates-in-javascript.html#fbid=qmDgJTYgi3E*/
     _dateDiff:function(datepart, fromdate, todate) {  
@@ -147,8 +138,7 @@ Polymer({
     },
 
     _getCountPassengers:function(obj){
-        var obj = obj[0],
-        count = 0; 
+        var count = 0; 
         // Visit non-inherited enumerable keys
         for (var item in obj) {
             if(obj[item]!==null || obj[item]!== undefined){   
