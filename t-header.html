@@ -9,15 +9,15 @@
     <template>
     <style>
     :host{
-    	display: block;
+        display: block;
         position: relative;
     }
     .body {
-		font-family: var(--header-font-family, --primary-font-family);
-		color: var(--light-color, #fff);
-/* 		padding: 0 10px;  */
-		background: var(--base-color-1, #147be1);
-		height: var(-t-header-size,55px);
+        font-family: var(--header-font-family, --primary-font-family);
+        color: var(--light-color, #fff);
+/*      padding: 0 10px;  */
+        background: var(--base-color-1, #147be1);
+        height: var(-t-header-size,55px);
     }
     :host([normal-heading]) a{
         z-index: 1;
@@ -36,17 +36,17 @@
         font-weight: 300;
     }
     iron-icon{
-    	background: transparent;
-    	min-width: 0;
-    	color:  var(--light-color, #fff);
-    	height: 30px;
-    	width: 30px;
+        background: transparent;
+        min-width: 0;
+        color:  var(--light-color, #fff);
+        height: 30px;
+        width: 30px;
         padding: 10px 5px;
     }
     </style>
         <div class="layout horizontal center body">
             <a on-click="_checkUrl">
-                <iron-icon icon="arrow-back"></iron-icon>
+                <iron-icon icon="[[icon]]"></iron-icon>
             </a>
             <div class="layout horizontal center flex header__mainRow">
                 <template is="dom-if" if="{{!normalHeading}}">
@@ -76,6 +76,11 @@ Polymer({
             type:String,
             reflectToAttribute:true,
             value:'Normal Heading'
+        },
+
+        icon:{
+            type:String,
+            value:'arrow-back'
         },
 
         url:{
