@@ -144,6 +144,8 @@ Polymer({
 
     /*This function is used to format date to (dd mmm)*/
     _getDisplayDate: function(val) {
+        if(!val)
+            return '';
         //TODO: accept format from globalization or from user
         var dateObj = val;
         var date = dateObj.getDate() < 10 ? '0' + dateObj.getDate() : dateObj.getDate();
