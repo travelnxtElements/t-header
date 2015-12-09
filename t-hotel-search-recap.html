@@ -6,6 +6,7 @@
     <style>
         :host {
             display: block;
+            width: 100%;
         }
         
         h6 {
@@ -15,8 +16,13 @@
             margin: 0;
             padding: 0;
             font-weight: normal;
+            
         }
-        
+        .ellipsis{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         p {
             margin: 0;
             padding: 0;
@@ -44,15 +50,13 @@
     </style>
     <template>        
         <div class="layout vertical">
-            <h6 class="layout horizontal center">
-                <template is="dom-if" if="{{location}}">
-                    {{location}}
-                </template>
-                <template is="dom-if" if="{{!location}}">
-                    {{hotelName}}
-                </template>
-            </h6>
-            <p id="detail" on-click="_editSearch" class="layout horizontal center center-justified">                
+            <template is="dom-if" if="{{location}}">
+                <h6 class="ellipsis">{{location}}</h6>
+            </template>
+            <template is="dom-if" if="{{!location}}">
+                <h6 class="ellipsis">{{hotelName}}</h6>
+            </template>
+            <p id="detail" on-click="_editSearch" class="layout horizontal center center-justified ellipsis">                
                 <span>{{_getDisplayDate(checkIn)}}</span>
                 <span>&nbsp;-&nbsp;</span>
                 <span>{{_getDisplayDate(checkOut)}}</span>
