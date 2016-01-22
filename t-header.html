@@ -3,7 +3,31 @@
 <link rel="import" href="../iron-icons/editor-icons.html" />
 <link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html" />
 <link rel="import" href="../t-button/t-button.html" />
+<!--
+    `<t-header>` is a polymer component that generates a header for mobile with a back button on left and right icon on right.
+    Both the icon can be modified with `icon` and `rightIcon` property.
+    You can take action on events fired on right button click `right-button-click`.
 
+    Set normal-heading to true and mention a label if you are just targeting normal heading.
+
+
+    Basic usage
+    `
+    <t-header url="@Url.Action("Index", "Details", Runtime.GetQueryParams(new List<KeyValuePair>()))" normal-heading label="Passenger Details"></t-header>
+    `
+    Advanced usage where we are passing content inside
+    `<t-header url="@Url.Action("Index", "Home", Runtime.GetQueryParams(new List<KeyValuePair>()))">
+                <t-flight-header
+                    id="flightHeader"
+                    is-one-way="[[isOneWay]]"
+                    url="@Url.Action("Index", "Home", Runtime.GetQueryParams(new List<KeyValuePair>()))"
+                    from-place="{{criteria.legs.0.departureLocation.code}}"
+                    to-place="{{criteria.legs.0.arrivalLocation.code}}"
+                    departure-date="{{criteria.legs.0.travelDate.date}}"
+                    passenger-Data="[[criteria.passengers]]"
+                    return-date="[[returnDate]]"></t-flight-header>
+            </t-header>`
+-->
 
 <dom-module id="t-header">
     <template>
@@ -83,11 +107,13 @@ Polymer({
             value:'Normal Heading'
         },
 
+        /*The left icon URL from set of iron icons. It has a default arrow back value.*/
         icon:{
             type:String,
             value:'arrow-back'
         },
 
+        /*The URL of the page to redirect to on left button click. Keep it empty to have no redirect action on left button click.*/
         url:{
             type:String,
             reflectToAttribute:true,
@@ -133,6 +159,7 @@ Polymer({
 
     /*to fire an event for the right icon click.*/
     _rightButtonClick:function(){
+        /*event for the right icon click.*/
         this.fire('right-button-click');
     }
 
