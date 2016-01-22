@@ -2,31 +2,19 @@
 <link rel="import" href="../iron-icons/iron-icons.html" />
 <link rel="import" href="../iron-icons/editor-icons.html" />
 <link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html" />
+<link rel="import" href="../t-text-container/travel-element-styles.html">
 <dom-module id="t-hotel-search-recap">
-    <style>
+    <style include="travel-element-styles">
         :host {
             display: block;
             width: 100%;
         }
         
         h6 {
-            font-size: 16px;
             line-height: 20px;
-            text-transform: capitalize;
-            margin: 0;
-            padding: 0;
-            font-weight: normal;
             
         }
-        .ellipsis{
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        p {
-            margin: 0;
-            padding: 0;
-            font-size: 12px;
+        #detail {
             line-height: 20px;
         }
         
@@ -51,12 +39,12 @@
     <template>        
         <div class="layout vertical">
             <template is="dom-if" if="{{location}}">
-                <h6 class="ellipsis">{{location}}</h6>
+                <h6 class="font-16 font-normal capitalize ellipsis">{{location}}</h6>
             </template>
             <template is="dom-if" if="{{!location}}">
-                <h6 class="ellipsis">{{hotelName}}</h6>
+                <h6 class="font-16 font-normal capitalize ellipsis">{{hotelName}}</h6>
             </template>
-            <p id="detail" on-click="_editSearch" class="layout horizontal center center-justified ellipsis">                
+            <p id="detail" on-click="_editSearch" class="layout horizontal center center-justified ellipsis font-12">                
                 <span>{{_getDisplayDate(checkIn)}}</span>
                 <span>&nbsp;-&nbsp;</span>
                 <span>{{_getDisplayDate(checkOut)}}</span>
