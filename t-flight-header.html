@@ -25,9 +25,10 @@
         <style include="travel-element-styles">
         :host {
             display: block;
+            width: 100%;
         }
         
-        h6 {
+        .heading {
             line-height: 20px;
             text-transform: uppercase;
         }
@@ -59,16 +60,16 @@
             left: 50%;
             transform: translateX(-50%) translateY(-50%);
         }
-        :host([center-align]) h6{
+        :host([center-align]) .heading{
             display:inline;
         }
         </style>
         <div class="layout vertical">
-            <h6 class="layout horizontal center font-16 font-normal">
-                <span>{{fromPlace}}</span>
+            <div class="font-16 font-normal heading ellipsis">
+                <span class="places text-right">{{fromPlace}}</span>
                 <iron-icon id="travelIcon" icon="{{_computedTravelIcon}}"></iron-icon>
-                <span>{{toPlace}}</span>
-            </h6>
+                <span class="places text-left">{{toPlace}}</span>
+            </div>
             <p id="detail" on-click="_takeBack" class="layout horizontal center center-justified font-12">
                 <span>{{_getDate(departureDate)}}</span> 
                 <span hidden$="{{isOneWay}}" class="layout horizontal"><span>&nbsp;-&nbsp;</span>
