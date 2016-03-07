@@ -158,6 +158,7 @@ Polymer({
         if(this.url !== ""){
             window.location.href = this.url;
         }
+        this.fire('left-button-click', {bubbles: false});
     },
 
     /*to fire an event for the right icon click.*/
