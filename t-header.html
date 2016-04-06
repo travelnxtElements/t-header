@@ -38,9 +38,8 @@
     }
     .body {
         font-family: var(--header-font-family, --primary-font-family);
-        color: var(--light-color, #fff);
-/*      padding: 0 10px;  */
-        background: var(--base-color-1, #147be1);
+        color: var(--t-header-color, #fff);
+        background: var(--t-header-bg, --base-color-1);
         height: var(--t-header-size,55px);
     }
     :host([normal-heading]) a{
@@ -51,7 +50,6 @@
     }
     :host([normal-heading]) .header__mainRow{
         position: absolute;
-        text-align: center;
         width: 100%;
         height: 100%;
         left: 0;
@@ -61,14 +59,12 @@
         font-size: 22px;
         line-height: var(--t-header-size,55px);
         font-weight: 300;
+
+        @apply(--t-header-normal);
     }
     iron-icon{
-        background: transparent;
-        min-width: 0;
-        color:  var(--light-color, #fff);
-        height: 30px;
-        width: 30px;
-        padding: 10px 5px;
+        padding: 10px;
+        @apply(--t-header-icons);
     }
     :host ::content p#detail{
       -ms-flex-pack: start;
