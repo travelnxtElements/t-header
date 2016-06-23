@@ -72,9 +72,12 @@
       -webkit-justify-content: flex-start;
       justify-content: flex-start;
     }
+    .link{
+        color: inherit;
+    }
     </style>
         <div class="layout horizontal center body">
-            <a on-click="_checkUrl" href$="[[url]]">
+            <a class="link" on-click="_checkUrl" href$="[[url]]">
                 <iron-icon icon="[[icon]]"></iron-icon>
             </a>
             <div class="layout horizontal center flex header__mainRow">
