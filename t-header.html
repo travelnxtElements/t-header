@@ -74,7 +74,7 @@
     }
     </style>
         <div class="layout horizontal center body">
-            <a on-click="_checkUrl">
+            <a on-click="_checkUrl" href$="[[url]]">
                 <iron-icon icon="[[icon]]"></iron-icon>
             </a>
             <div class="layout horizontal center flex header__mainRow">
@@ -116,8 +116,7 @@ Polymer({
         /*The URL of the page to redirect to on left button click. Keep it empty to have no redirect action on left button click.*/
         url:{
             type:String,
-            reflectToAttribute:true,
-            value:''
+            reflectToAttribute:true
         },
 
         /*The Icon on the right.. Not works when the normal heading is set to true.*/
@@ -152,9 +151,6 @@ Polymer({
     },
 
     _checkUrl:function(e){
-        if(this.url !== ""){
-            window.location.href = this.url;
-        }
         this.fire('left-button-click', {bubbles: false});
     },
 
