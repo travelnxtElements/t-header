@@ -34,23 +34,23 @@ Custom property | Description | Default
                 display: block;
                 position: relative;
             }
-            
+
             .body {
                 font-family: var(--header-font-family, --primary-font-family);
                 color: var(--t-header-color, #fff);
                 background: var(--t-header-bg, --base-color-1);
                 height: var(--t-header-size, 55px);
             }
-            
+
             :host([normal-heading]) a {
                 z-index: 1;
             }
-            
+
             .header__mainRow {
                 overflow: hidden;
                 padding-left: 10px;
             }
-            
+
             :host([normal-heading]) .header__mainRow {
                 position: absolute;
                 top: 0;
@@ -58,26 +58,28 @@ Custom property | Description | Default
                 bottom: 0;
                 right: 0;
             }
-            
-            :host([normal-heading]) .header__mainRow::content h1 {
+
+            :host([normal-heading]) .header__mainRow ::content h1 {
                 margin: 0 auto;
                 font-size: 22px;
                 line-height: var(--t-header-size, 55px);
                 font-weight: 300;
+
                 @apply(--t-header-normal);
             }
-            
+
             iron-icon {
                 padding: 10px;
+
                 @apply(--t-header-icons);
             }
-            
-            :host::content p#detail {
+
+            :host ::content p#detail {
                 -ms-flex-pack: start;
                 -webkit-justify-content: flex-start;
                 justify-content: flex-start;
             }
-            
+
             .link {
                 color: inherit;
             }
