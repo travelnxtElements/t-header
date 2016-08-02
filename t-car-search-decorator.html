@@ -48,9 +48,9 @@
             var modifiedObject = {};
 
             //Location
-            modifiedObject.startLocation = criteria.pickupLocation.cityName;
+            modifiedObject.startLocation = criteria.pickupLocation.name;
             if (criteria.pickupLocation.geoCode != criteria.dropoffLocation.geoCode) {
-                modifiedObject.endLocation = criteria.dropoffLocation.cityName;
+                modifiedObject.endLocation = criteria.dropoffLocation.name;
             }
 
             //Date

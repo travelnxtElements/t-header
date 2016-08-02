@@ -94,7 +94,7 @@ Polymer({
         var modifiedObject = {};
 
         //Location
-        modifiedObject.startLocation = searchCriteria.location.name;
+        modifiedObject.startLocation = searchCriteria.location.name || searchCriteria.location.formattedAddress;
 
         //start-end date
         modifiedObject.startDate = this._getDate(searchCriteria.checkIn);

@@ -57,7 +57,15 @@
             var modifiedObject = {};
 
             //Location
-            modifiedObject.startLocation = searchCriteria.location.cityName;
+            modifiedObject.startLocation = searchCriteria.location.name;
+
+            if (searchCriteria.location.stateCode && searchCriteria.location.stateCode.length) {
+                modifiedObject.startLocation += ", " + searchCriteria.location.stateCode;
+            }
+
+            if (searchCriteria.location.countryCode && searchCriteria.location.countryCode.length) {
+                modifiedObject.startLocation += ", " + searchCriteria.location.countryCode;
+            }
 
             //Date
             modifiedObject.startDate = this._getDate(searchCriteria.fromDate);
