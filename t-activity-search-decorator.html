@@ -49,6 +49,11 @@
         },
 
         compileActivitySearchCriteria: function (searchCriteria) {
+
+            if (!searchCriteria || !searchCriteria.location) {
+                return;
+            }
+
             var modifiedObject = {};
 
             //Location
