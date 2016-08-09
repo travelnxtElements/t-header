@@ -5,7 +5,7 @@
 <!--
 `t-header` is an application header component. It has a back button on the left
 and an icon on the right or a label in the middle. The icon on right can be used
-as a forward button.
+as a forward button or any other handling.
 
 Example:
 
@@ -26,6 +26,10 @@ Custom property | Description | Default
 --t-header-icons | Mixin applied to the icons | { }
 --t-header-normal | Mixin applied to the heading | { }
 --t-header-size | The height of the header | 55px
+
+Note:
+
+It allows you to pass anything in its content. It selects all in its content and populate that between the left and right icons.
 -->
 <dom-module id="t-header">
     <template>
@@ -86,7 +90,7 @@ Custom property | Description | Default
         </style>
 
         <div class="layout horizontal center body">
-            <a class="link" on-click="_checkUrl" href$="[[url]]">
+            <a class="link" on-click="_checkUrl" href$="[[url]]" hidden$="[[hideLeftIcon]]">
                 <iron-icon icon="[[icon]]"></iron-icon>
             </a>
             <div class="layout horizontal center flex header__mainRow">
@@ -111,6 +115,18 @@ Polymer({
     is: 't-header',
 
     properties: {
+        /**
+        * Fired when the left icon is clicked
+        *
+        * @event left-button-click
+        */ 
+
+        /**
+        * Fired when the right icon is clicked
+        *
+        * @event right-button-click
+        */ 
+
 
         /**
          * The label to display in the middle of the header if `normalHeading`
@@ -151,6 +167,17 @@ Polymer({
             type: String,
             reflectToAttribute: true,
             value: ''
+        },      
+
+
+        /**
+         * The icon to be displayed on the right side of the header if
+         * `normalHeadin` is set to false.
+         * @type {String}
+         */
+        hideLeftIcon: {
+            type: Boolean,
+            value: false
         },
 
         /**
