@@ -68,8 +68,10 @@
             }
 
             //Date
-            modifiedObject.startDate = this._getDate(searchCriteria.fromDate);
-            modifiedObject.endDate = this._getDate(searchCriteria.toDate);
+            var startDateComponents = this._getDateComponents(searchCriteria.fromDate);
+            var endDateComponents = this._getDateComponents(searchCriteria.toDate);
+            modifiedObject.startDate = startDateComponents.shortDay + ", " + startDateComponents.date + " " + startDateComponents.shortMonth;
+            modifiedObject.endDate = endDateComponents.shortDay + ", " + endDateComponents.date + " " + endDateComponents.shortMonth;
 
             this.output = modifiedObject;
         }
