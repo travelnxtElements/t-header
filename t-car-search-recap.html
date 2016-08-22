@@ -47,10 +47,10 @@
     </style>
     <template>        
         <div class="layout vertical">
-            <h6 class="font-16 font-normal capitalize ellipsis">[[data.pickupLocation.cityName]] 
+            <h6 class="font-16 font-normal capitalize ellipsis">[[data.pickupLocation.name]] 
                 <template is="dom-if" if="{{_dropOffSame}}">
                     <iron-icon icon="[[directionIcon]]"></iron-icon>
-                    [[data.dropoffLocation.cityName]]
+                    [[data.dropoffLocation.name]]
                 </template>
             </h6>
             
