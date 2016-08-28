@@ -45,6 +45,11 @@
         },
 
         compileCarSearchCriteria: function (criteria) {
+
+            if (!criteria) {
+                return;
+            }
+
             var modifiedObject = {};
 
             //Location
