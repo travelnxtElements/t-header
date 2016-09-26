@@ -78,10 +78,12 @@ Polymer({
         var paxInfo = '';
         var _self = this;
         passengers.forEach(function (pax) {
-            if (paxInfo.length) {
-                paxInfo = paxInfo + ", " + _self._getPassenger(pax.quantity, pax.type);
-            } else {
-                paxInfo +=  _self._getPassenger(pax.quantity, pax.type);
+            if (pax.quantity) {
+                if (paxInfo.length) {
+                    paxInfo = paxInfo + ", " + _self._getPassenger(pax.quantity, pax.type);
+                } else {
+                    paxInfo +=  _self._getPassenger(pax.quantity, pax.type);
+                }
             }
         });
         return paxInfo;
