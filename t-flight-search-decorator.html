@@ -41,6 +41,16 @@ Polymer({
             type: Object
         },
 
+        onewayIcon: {
+            type: String,
+            value: 'trending-flat'
+        },
+
+        roundTripIcon: {
+            type: String,
+            value: 'swap-horiz'
+        },
+
         /**
          * Stores output of the decorator
          * @type {Object}
@@ -53,39 +63,49 @@ Polymer({
 
     compileFlightSearchCriteria: function (searchCriteria) {
 
-        if (!searchCriteria.legs.length) {
+        if (!searchCriteria.arrivalAirport || !searchCriteria.departureAirport) {
             return;
         }
         var modifiedObject = {};
 
         //Location
-        modifiedObject.startLocation = searchCriteria.legs[0].departureLocation.cityName;
-        modifiedObject.endLocation = searchCriteria.legs[0].arrivalLocation.cityName;
+        modifiedObject.startLocation = searchCriteria.departureAirport.cityName;
+        modifiedObject.endLocation = searchCriteria.arrivalAirport.cityName;
 
         //start-end date
-        modifiedObject.startDate = this._getDate(searchCriteria.legs[0].travelDate.date);
-        modifiedObject.endDate = searchCriteria.itineraryType == "RoundTrip" ? this._getDate(searchCriteria.legs[1].travelDate.date) : null;
+        modifiedObject.startDate = this._getDate(searchCriteria.departureDate);
+        modifiedObject.endDate = searchCriteria.itineraryType == "RoundTrip" ? 
+            this._getDate(searchCriteria.arrivalDate) : null;
+
+        modifiedObject.locationSeperatorIcon =
+            searchCriteria.itineraryType == "RoundTrip" ? this.roundTripIcon : this.onewayIcon;
 
         //guests
-        modifiedObject.guestInfo = this._getPaxInfo(searchCriteria.passengers);
-
-        //modifiedObject.locationSeperatorIcon = searchCriteria.itineraryType == "OneWay" ? 'trending-flat' : 'swap-horiz'; 
+        modifiedObject.guestInfo = this._getPaxInfo(searchCriteria);
 
         this.output = modifiedObject;
     },
 
-    _getPaxInfo: function (passengers) {
+    _getPaxInfo: function (searchCriteria) {
         var paxInfo = '';
-        var _self = this;
-        passengers.forEach(function (pax) {
-            if (pax.quantity) {
-                if (paxInfo.length) {
-                    paxInfo = paxInfo + ", " + _self._getPassenger(pax.quantity, pax.type);
-                } else {
-                    paxInfo +=  _self._getPassenger(pax.quantity, pax.type);
-                }
+        paxInfo += this._getPassenger(searchCriteria.adult, "Adult");
+
+        if (searchCriteria.senior) {
+            if (paxInfo.length) {
+                paxInfo = paxInfo + ", " + this._getPassenger(searchCriteria.senior, "Senior");
+            } else {
+                paxInfo = this._getPassenger(searchCriteria.senior, "Senior");
             }
-        });
+        }
+
+        if (searchCriteria.child) {
+            paxInfo = paxInfo + ", " + this._getPassenger(searchCriteria.child, "Child");
+        }
+
+        if (searchCriteria.infant) {
+            paxInfo = paxInfo + ", " + this._getPassenger(searchCriteria.infant, "Infant");
+        }
+
         return paxInfo;
     },
 
@@ -98,7 +118,7 @@ Polymer({
                 break;
             default:
                 if (quantity == 0 || quantity > 1)
-                    return quantity + " " +type +"s";
+                    return quantity + " " +type + "s";
                 return (quantity + " " + type).trim();
         }
     }

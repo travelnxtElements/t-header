@@ -69,7 +69,7 @@
                 <template is="dom-if" if="[[endDate]]">&nbsp;-&nbsp;[[endDate]]<template is="dom-if" if="[[endTime]]">,&nbsp;[[endTime]]</template></template>
                 <template is="dom-if" if="[[additionalInfo]]">,&nbsp;[[additionalInfo]]</template>
                 <template is="dom-if" if="[[guestInfo]]">,&nbsp;[[guestInfo]]</template>
-                <iron-icon on-click="_editSearch" hidden$=[[hideEditIcon]] id="pencil" icon="[[editSearchIcon]]"></iron-icon>
+                <iron-icon on-tap="_editSearch" hidden$=[[hideEditIcon]] id="pencil" icon="[[editSearchIcon]]"></iron-icon>
             </p>
         </div>
     </template>
@@ -229,6 +229,10 @@
             this.additionalInfo = this.recapData.additionalInfo;
 
             this.guestInfo = this.recapData.guestInfo;
+
+            if (this.recapData.locationSeperatorIcon) {
+                this.locationSeperatorIcon = this.recapData.locationSeperatorIcon;
+            }
 
             this.fire('search-criteria-recap');
         }
