@@ -55,12 +55,13 @@
                 </h6>
             </template>
             <template is="dom-if" if="[[!itineraryName]]">
-                <h6 class="font-16 font-normal capitalize ellipsis">[[startLocation]]&nbsp;
+                <div class="font-16 font-normal capitalize heading ellipsis">
+                    <span class="places">[[startLocation]]</span>
                     <template is="dom-if" if="[[endLocation]]">
-                        <iron-icon icon="[[locationSeperatorIcon]]"></iron-icon>
-                        &nbsp;[[endLocation]]
+                        <iron-icon id="travelIcon" icon="[[locationSeperatorIcon]]"></iron-icon>
+                        <span class="places">[[endLocation]]</span>
                     </template>
-                </h6>
+                </div>
             </template>
             
             <p id="detail" class="layout horizontal center center-justified ellipsis font-12">                
